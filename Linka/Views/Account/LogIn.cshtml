@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewData["Title"] = "LogIn";
+}
+
+<!-- Start Page Title Area -->
+<div class="page-title-area bg-7">
+    <div class="container">
+        <div class="page-title-content">
+            <h2>Log In</h2>
+            <ul>
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>Pages</li>
+                <li>User</li>
+                <li class="active">Log In</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+<!-- Start Log In Area -->
+<div class="user-area-all-style log-in-area ptb-100">
+    <div class="container">
+        <div class="contact-form-action">
+            <form method="post">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <button class="default-btn" type="submit">
+                            Google
+                        </button>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <button class="default-btn" type="submit">
+                            Facebook
+                        </button>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <button class="default-btn" type="submit">
+                            Twitter
+                        </button>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="name" placeholder="Username or Email">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input class="form-control" type="password" name="password" placeholder="Password">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-6 form-condition">
+                        <div class="agree-label">
+                            <input type="checkbox" id="chb1">
+                            <label for="chb1">
+                                Remember Me
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-6">
+                        <a class="forget" href="recover-password.html">Forgot my password?</a>
+                    </div>
+
+                    <div class="col-12">
+                        <button class="default-btn btn-two" type="submit">
+                            Log In Now
+                        </button>
+                    </div>
+
+                    <div class="col-12">
+                        <p class="account-desc">
+                            Not a member?
+                            <a asp-controller="Account" asp-action="SignIn">Register</a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Log In Area -->
+@section Scripts {
+    <!-- Jquery-3.5.1.Slim.Min.JS -->
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <!-- Popper JS -->
+    <script src="/js/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Meanmenu JS -->
+    <script src="/js/jquery.meanmenu.js"></script>
+    <!-- Wow JS -->
+    <script src="/js/wow.min.js"></script>
+    <!-- Owl Carousel JS -->
+    <script src="/js/owl.carousel.js"></script>
+    <!-- Owl Magnific JS -->
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <!-- Nice Select JS -->
+    <script src="/js/jquery.nice-select.min.js"></script>
+    <!-- Form Validator JS -->
+    <script src="/js/form-validator.min.js"></script>
+    <!-- Contact JS -->
+    <script src="/js/contact-form-script.js"></script>
+    <!-- Ajaxchimp JS -->
+    <script src="/js/jquery.ajaxchimp.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/custom.js"></script>
+}
