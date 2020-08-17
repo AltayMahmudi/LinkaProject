@@ -1,6 +1,6 @@
-﻿
+﻿@model AccountViewModel
 @{
-    ViewData["Title"] = "LogIn";
+    ViewData["Title"] = "Login";
 }
 
 <!-- Start Page Title Area -->
@@ -14,7 +14,6 @@
                         Home
                     </a>
                 </li>
-
                 <li>Pages</li>
                 <li>User</li>
                 <li class="active">Log In</li>
@@ -27,7 +26,7 @@
 <div class="user-area-all-style log-in-area ptb-100">
     <div class="container">
         <div class="contact-form-action">
-            <form method="post">
+            <form method="post" asp-action="LogIn">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <button class="default-btn" type="submit">
@@ -49,19 +48,21 @@
 
                     <div class="col-12">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="name" placeholder="Username or Email">
+                            <input asp-for="LogIn.Email" class="form-control" placeholder="Email">
+                            <span asp-validation-for="LogIn.Email"></span>
                         </div>
                     </div>
 
                     <div class="col-12">
                         <div class="form-group">
-                            <input class="form-control" type="password" name="password" placeholder="Password">
+                            <input asp-for="LogIn.Password" class="form-control" placeholder="Password">
+                            <span asp-validation-for="LogIn.Password"></span>
                         </div>
                     </div>
 
                     <div class="col-lg-6 col-sm-6 form-condition">
                         <div class="agree-label">
-                            <input type="checkbox" id="chb1">
+                            <input asp-for="LogIn.RememberMe" type="checkbox" id="chb1">
                             <label for="chb1">
                                 Remember Me
                             </label>
@@ -115,4 +116,6 @@
     <script src="/js/jquery.ajaxchimp.min.js"></script>
     <!-- Custom JS -->
     <script src="/js/custom.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }

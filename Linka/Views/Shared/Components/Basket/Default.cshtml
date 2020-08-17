@@ -1,0 +1,166 @@
+﻿@model IEnumerable<BasketViewModel>
+@{
+	decimal total = 0M;
+    decimal subtotal = 0M;
+    decimal Finaltotal = 0M;
+
+
+}
+
+
+
+    <section class="cart-area ptb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <form>
+                        <div class="cart-wraps">
+                            <div class="cart-table table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Unit Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach (var item in Model)
+									{
+										decimal price = item.Product.Price;
+										decimal discountPrice = item.Product.DiscountPrice;
+										if (discountPrice == 0)
+										{
+											total = (price * item.Count);
+											subtotal += (price * item.Count);
+											Finaltotal = (subtotal + 50);
+										}
+										else
+										{
+
+											total = (discountPrice * item.Count);
+											subtotal += (discountPrice * item.Count);
+											Finaltotal = (subtotal + 50);
+										}
+
+                                        <tbody>
+
+                                            <tr>
+
+                                                <td class="product-thumbnail">
+                                                    <a asp-controller="products" asp-action="Index" asp-route-id="@item.Product.Id">
+                                                        <img src="uploads/@item.Product.Photos.First()" alt="@item.Product.Name">
+                                                    </a>
+                                                </td>
+
+                                                <td class="product-name">
+                                                    <a asp-controller="products" asp-action="Index" asp-route-id="@item.Product.Id">@item.Product.Name</a>
+                                                </td>
+
+                                                <td class="product-price">
+                                                    @if (discountPrice == 0)
+                                                    {
+                                                        <span class="unit-amount">@price.ToString("#.00")$</span>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="unit-amount">@discountPrice.ToString("#.00")$</span>
+
+                                                    }
+
+                                                </td>
+
+                                                <td class="product-quantity">
+                                                    <a>@item.Count x</a>
+                                                </td>
+
+                                                <td class="product-subtotal">
+                                                    <span class="subtotal-amount">@total.ToString("#.00")$</span>
+
+                                                </td>
+                                                <td>
+                                                    <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Id" class="remove basket-remove">
+                                                        <i class='bx bx-trash'></i>
+                                                    </a>
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    }
+
+                                </table>
+                            </div>
+
+                            <div class="cart-buttons">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-7 col-sm-7 col-md-7">
+                                        <div class="continue-shopping-box">
+                                            <a href="#" class="default-btn page-btn">
+                                                Continue Shopping
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-5 col-sm-5 col-md-5 text-right">
+                                        <a href="#" class=" default-btn page-btn">
+                                            Update Cart
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="coupon-wrap">
+                                    <div class="shops-form">
+                                        <h3>Calculate Shipping</h3>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <select>
+                                                        <option value="">Credit Card Type</option>
+                                                        <option value="">VISA</option>
+                                                        <option value="">Master Card</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <input type="text" class="form-control" placeholder="Credit Card Number">
+                                            </div>
+                                            <div class="form-group col-12">
+                                                <input type="text" class="form-control" placeholder="Card Verification Number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Coupon Code">
+                                        </div>
+                                        <a href="#" class="default-btn page-btn">
+                                            Apply Coupon
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="cart-totals">
+                                    <h3>Cart Totals</h3>
+                                    <ul>
+                                        <li>Subtotal <span> <a>@subtotal.ToString("#.00")$</a></span></li>
+                                        <li>Shipping <span>$30.00</span></li>
+                                        <li>Coupon <span>$20.00</span></li>
+                                        <li>Total <span><b>@Finaltotal.ToString("#.00")$</b></span></li>
+                                    </ul>
+                                    <a asp-controller="Checkout" asp-action="Index" class="default-btn page-btn">
+                                        Proceed to Checkout
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>

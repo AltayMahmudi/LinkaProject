@@ -1,0 +1,151 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "New Product";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form method="post" >
+                <div class="form-group">
+                    <label>Status</label>
+                    <div class="custom-control custom-radio custom-control-inline ml-3">
+                        <input type="radio" asp-for="Status" value="true" class="custom-control-input" checked="" />
+                        <label class="custom-control-label" asp-for="Status">Active</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline ">
+                        <input type="radio" asp-for="Status" value="false" class="custom-control-input" />
+                        <label class="custom-control-label" asp-for="Status">İnactive</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name">Name</label>
+                    <input class="form-control form-control-user " asp-for="Name" />
+                    <span class="field-validation-valid" asp-validation-for="Name"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="StarCount">StarCount</label>
+                    <input class="form-control form-control-user " asp-for="StarCount" />
+                    <span class="field-validation-valid" asp-validation-for="StarCount"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price">Price</label>
+                    <input class="form-control form-control-user " asp-for="Price" />
+                    <span class="field-validation-valid" asp-validation-for="Price"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="DiscountPrice">Discount Price</label>
+                    <input class="form-control form-control-user " asp-for="DiscountPrice" />
+                    <span class="field-validation-valid" asp-validation-for="DiscountPrice"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="IsSale">Sale</label>
+                    <input class="custom-checkbox " asp-for="IsSale" />
+                    <span class="field-validation-valid" asp-validation-for="IsSale"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="SKU">SKU</label>
+                    <input class="form-control form-control-user " asp-for="SKU" />
+                    <span class="field-validation-valid" asp-validation-for="SKU"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description">Description</label>
+                    <input class="form-control form-control-user " asp-for="Description" />
+                    <span class="field-validation-valid" asp-validation-for="Description"></span>
+
+                </div>
+				<div class="form-group gallery">
+                    <label for="files"type="button" id="uploader" class="btn btn-secondary">Upload Image</label>
+					<input type="file" name="files" id="files" class="d-none" accept="image" />
+					<div class="photos">
+                        <div class="item">
+                            @*<input type="hidden" value="2" name="Product.Photos[1].OrderBy" />
+                            <input type="hidden" value="23952935299325.jpg" name="Product.Photos[1].Photo" />
+							<a href="#" data-name="23952935299325.jpg" class="remove"><i class="fa fa-trash"></i></a>*@
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group d-flex justify-content-end mt-3">
+
+                    <button type="submit" class="btn btn-primary btn-icon-split">
+                        <span class="icon" text-white-50>
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="text">Create</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>$(document).ready(function () {
+			if ($("input[name=files]").length) {
+				$("input[name=files]").change(function () {
+					for (var i = 0; i < this.files.length; i++) {
+						var formData = new formData();
+						formData.append("file", this.files[i]);
+						$.ajax({
+							url: "/products/Upload",
+							type: "POST",
+							data: formData,
+							processData: false,
+							contentType: false,
+							dataType: "json",
+							success: function (responsive) {
+								let index = $(".photos .item").length;
+								$(".photos").append(`<div class="item">
+								< input type = "hidden" value = "`+ (index + 1) + `" name = "Product.Photos[` + index + 1 + `].OrderBy/>
+								< input type = "hidden" value = "`+ response.filename + `"name = "Product.Photos[` + index + 1 + `].Photo/>
+								< img src = "/uploads/`+ response.filename + `" />
+								<a href="#" data-name="`+ response.filename + `" class="remove"><i class="fa fa-trash"></i></a>
+								</div >`);
+
+							}
+						});
+					}
+				});
+				$(document).on("click", ".photos .remove", function (ev) {
+					ev.preventDefault();
+					let elem = (this).parents(".item");
+					$.ajax({
+						url: '/products/remove',
+						data: {
+							name: $(this).data("name")
+						},
+						type: "post",
+						dataType: "json",
+						success: function (responsive) {
+							elem.remove();
+						}
+					});
+
+				});
+			}
+		});
+    </script>
+
+}
+
+@section Head{ 
+
+    <link rel="stylesheet" href="~/lib/dropzone/dropzone.min.css">
+
+}
+

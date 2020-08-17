@@ -10,8 +10,8 @@ namespace LinkaRepository.Models
 	{
         public int Id { get; set; }
         public bool Status { get; set; }
-        public DateTime AddedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        public DateTime AddedDate { get; set; } = DateTime.Now;
+        public DateTime ModifiedDate { get; set; } = DateTime.Now;
 
         [MaxLength(50)]
         public string AddedBy { get; set; }

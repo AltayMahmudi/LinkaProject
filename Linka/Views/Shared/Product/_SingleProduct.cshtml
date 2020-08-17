@@ -1,0 +1,39 @@
+﻿@model ProductViewModel
+<div class="single-product-box">
+    <div class="product-image">
+        <a asp-controller="Products" asp-action="Index" asp-route-id="@Model.Id">
+            <img src="uploads/@Model.Photos.First()" alt="@Model.Name">
+          
+        </a>
+
+        <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" class="add-to-cart-btn">Add To Cart <i class="flaticon-shopping-cart"></i></a>
+        @if (Model.IsSale != false) 
+        {
+         <div class="sale-btn">Sale!</div>
+        }
+		
+    </div>
+    <div class="product-content">
+        <h3><a asp-controller="Products" asp-action="Index" asp-route-id="@Model.Id">@Model.Name</a></h3>
+        <div class="price">
+            @if (Model.DiscountPrice == 0)
+            {
+                <span class="new">@Model.Price.ToString("#.00")$</span>
+
+			}
+			else
+			{
+                <span class="new">@Model.DiscountPrice.ToString("#.00")$</span>
+                <span class="old">>@Model.Price.ToString("#.00")$</span>
+            }
+
+            
+        </div>
+        <div class="rating">
+            @for (int i = 1; i <= 5; i++)
+            {
+                <i class='bx bx-star @(Model.StarCount>=i?"bx bxs-star":"")'></i>
+            }
+        </div>
+    </div>
+</div>

@@ -8,6 +8,8 @@ namespace Repository.Models
 {
     public class User : BaseEntity
     {
+
+        public bool IsAdmin { get; set; }
         [Required]
         [MaxLength(50)]
         public string Email { get; set; }

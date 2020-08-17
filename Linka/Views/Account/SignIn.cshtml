@@ -1,4 +1,4 @@
-﻿
+﻿@model AccountViewModel
 @{
     ViewData["Title"] = "SignIn";
 }
@@ -27,7 +27,7 @@
 <div class="user-area-all-style sign-up-area ptb-100">
     <div class="container">
         <div class="contact-form-action">
-            <form method="post">
+            <form method="post"   asp-action="SignIn">>
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <button class="default-btn" type="submit">
@@ -49,37 +49,48 @@
 
                     <div class="col-md-12 col-sm-12">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="name" placeholder="First Name">
+                            <input asp-for="Register.Name" class="form-control" placeholder="First Name">
+                            <span asp-validation-for="Register.Name"></span>
                         </div>
                     </div>
 
                     <div class="col-md-12 col-sm-12 ">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="name" placeholder="Last Name">
+                            <input asp-for="Register.Surname" class="form-control" placeholder="Last Name">
+                            <span asp-validation-for="Register.Surname"></span>
+
                         </div>
                     </div>
 
                     <div class="col-md-12 col-sm-12">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="name" placeholder="Enter your Username">
+                            <input asp-for="Register.UserName" class="form-control" placeholder="Enter your Username">
+                            <span asp-validation-for="Register.UserName"></span>
+
                         </div>
                     </div>
 
                     <div class="col-md-12 col-sm-12">
                         <div class="form-group">
-                            <input class="form-control" type="email" name="email" placeholder="Email Address">
+                            <input asp-for="Register.Email" class="form-control" placeholder="Email Address">
+                            <span asp-validation-for="Register.Email"></span>
+
                         </div>
                     </div>
 
                     <div class="col-md-12 col-sm-12">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="password" placeholder="Password">
+                            <input asp-for="Register.Password" class="form-control" placeholder="Password">
+                            <span asp-validation-for="Register.Password"></span>
+
                         </div>
                     </div>
 
                     <div class="col-md-12 col-sm-12 ">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="password" placeholder="Confirm Password">
+                            <input asp-for="Register.PasswordConfirm" class="form-control" placeholder="Confirm Password">
+                            <span asp-validation-for="Register.PasswordConfirm"></span>
+
                         </div>
                     </div>
 
@@ -144,4 +155,6 @@
     <script src="/js/jquery.ajaxchimp.min.js"></script>
     <!-- Custom JS -->
     <script src="/js/custom.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }

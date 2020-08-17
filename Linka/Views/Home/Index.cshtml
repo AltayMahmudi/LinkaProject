@@ -1,6 +1,11 @@
-﻿@{
+﻿@model IEnumerable<Blog>
+@inject IAuth  _auth
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
 
 <!-- Start Main Blog Area -->
 <section class="main-blog-area pb-100">
@@ -119,188 +124,54 @@
         <div class="section-title">
             <h2>Featured</h2>
         </div>
+        <a asp-controller="Home" asp-action="Edit" class="read-more">Create</a>
 
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-featured">
-                    <a href="post-style-one.html" class="blog-img">
-                        <img src="/img/home-one/featured-img/1.jpg" alt="Image">
-                        <span>lifestyle</span>
-                    </a>
 
-                    <div class="featured-content">
-                        <ul>
-                            <li>
-                                <a href="#" class="admin">
-                                    <i class="bx bx-user"></i>
-                                    Admin By Jhona Walker
+        @foreach (var blog in Model)
+        {
+            @if (blog.IsFeatured == true)
+            {
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-featured">
+                            <a href="post-style-one.html" class="blog-img">
+                                <img src="/img/home-one/featured-img/1.jpg" alt="Image">
+                                <span>@blog.BlogCategory</span>
+                            </a>
+                            <div class="featured-content">
+                                <ul>
+                                    <li>
+                                        <a href="#" class="admin">
+                                            <i class="bx bx-user"></i>
+                                            
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <i class="bx bx-calendar"></i>
+                                        @blog.AddedDate
+                                    </li>
+                                </ul>
+
+                                <a href="post-style-one.html">
+                                    <h3>@blog.Title</h3>
                                 </a>
-                            </li>
-                            <li>
-                                <i class="bx bx-calendar"></i>
-                                25 Jun 2020
-                            </li>
-                        </ul>
+                                @if (_auth.User.IsAdmin == true)
+                                {
+                                    <a asp-controller="Home" asp-action="Edit" asp-route-id="@blog.Id" class="read-more">Edit</a>
+                                    <a asp-controller="Home" asp-action="Remove" asp-route-id="@blog.Id" class="read-more">Remove</a>
+                                }
+                                <a asp-controller="Home" asp-action="BlogPage" asp-route-id="@blog.Id" class="read-more">Read More</a>
 
-                        <a href="post-style-one.html">
-                            <h3>A Simple Way to Address the Gap Between Attention</h3>
-                        </a>
 
-                        <a href="post-style-one.html" class="read-more">Read More</a>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
 
-            <div class="col-lg-4 col-md-6">
-                <div class="single-featured">
-                    <a href="post-style-one.html" class="blog-img">
-                        <img src="/img/home-one/featured-img/2.jpg" alt="Image">
-                        <span>Fashion</span>
-                    </a>
+        }
 
-                    <div class="featured-content">
-                        <ul>
-                            <li>
-                                <a href="#" class="admin">
-                                    <i class="bx bx-user"></i>
-                                    Admin By Kilva Walker
-                                </a>
-                            </li>
-                            <li>
-                                <i class="bx bx-calendar"></i>
-                                26 Jun 2020
-                            </li>
-                        </ul>
-
-                        <a href="post-style-one.html">
-                            <h3>Style Tips Form Top Designer of United States</h3>
-                        </a>
-
-                        <a href="post-style-one.html" class="read-more">Read More</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="single-featured">
-                    <a href="post-style-one.html" class="blog-img">
-                        <img src="/img/home-one/featured-img/3.jpg" alt="Image">
-                        <span>Music</span>
-                    </a>
-
-                    <div class="featured-content">
-                        <ul>
-                            <li>
-                                <a href="#" class="admin">
-                                    <i class="bx bx-user"></i>
-                                    Admin By Jexk Walker
-                                </a>
-                            </li>
-                            <li>
-                                <i class="bx bx-calendar"></i>
-                                27 Jun 2020
-                            </li>
-                        </ul>
-
-                        <a href="post-style-one.html">
-                            <h3>In 2020 Top Treeing Music Concert Program</h3>
-                        </a>
-
-                        <a href="post-style-one.html" class="read-more">Read More</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="single-featured">
-                    <a href="post-style-one.html" class="blog-img">
-                        <img src="/img/home-one/featured-img/4.jpg" alt="Image">
-                        <span>Culture</span>
-                    </a>
-
-                    <div class="featured-content">
-                        <ul>
-                            <li>
-                                <a href="#" class="admin">
-                                    <i class="bx bx-user"></i>
-                                    Admin By Anna Dew
-                                </a>
-                            </li>
-                            <li>
-                                <i class="bx bx-calendar"></i>
-                                28 Jun 2020
-                            </li>
-                        </ul>
-
-                        <a href="post-style-one.html">
-                            <h3>What to Expect From the 2020 Oscar Nomination</h3>
-                        </a>
-
-                        <a href="post-style-one.html" class="read-more">Read More</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="single-featured">
-                    <a href="post-style-one.html" class="blog-img">
-                        <img src="/img/home-one/featured-img/5.jpg" alt="Image">
-                        <span>World</span>
-                    </a>
-
-                    <div class="featured-content">
-                        <ul>
-                            <li>
-                                <a href="#" class="admin">
-                                    <i class="bx bx-user"></i>
-                                    Admin By Zinka Jhona
-                                </a>
-                            </li>
-                            <li>
-                                <i class="bx bx-calendar"></i>
-                                29 Jun 2020
-                            </li>
-                        </ul>
-
-                        <a href="post-style-one.html">
-                            <h3>Impossibly High Beauty Standards Are Ruining My Self Esteem</h3>
-                        </a>
-
-                        <a href="post-style-one.html" class="read-more">Read More</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="single-featured">
-                    <a href="post-style-one.html" class="blog-img">
-                        <img src="/img/home-one/featured-img/6.jpg" alt="Image">
-                        <span>Music</span>
-                    </a>
-
-                    <div class="featured-content">
-                        <ul>
-                            <li>
-                                <a href="#" class="admin">
-                                    <i class="bx bx-user"></i>
-                                    Admin By Altk Walker
-                                </a>
-                            </li>
-                            <li>
-                                <i class="bx bx-calendar"></i>
-                                30 Jun 2020
-                            </li>
-                        </ul>
-
-                        <a href="post-style-one.html">
-                            <h3>The 4 convolution's Neural Network Models That Can Classify</h3>
-                        </a>
-
-                        <a href="post-style-one.html" class="read-more">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 <!-- End Featured Area -->
@@ -1102,4 +973,6 @@
     </div>
 </section>
 <!-- End Latest Project Area -->
-@section Scripts{ }
+@section Scripts{
+    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script> }

@@ -2,7 +2,6 @@ C:\Users\User\source\repos\Linka\LinkaRepository\bin\Debug\netcoreapp3.1\LinkaRe
 C:\Users\User\source\repos\Linka\LinkaRepository\bin\Debug\netcoreapp3.1\LinkaRepository.dll
 C:\Users\User\source\repos\Linka\LinkaRepository\obj\Debug\netcoreapp3.1\LinkaRepository.AssemblyInfoInputs.cache
 C:\Users\User\source\repos\Linka\LinkaRepository\obj\Debug\netcoreapp3.1\LinkaRepository.AssemblyInfo.cs
-C:\Users\User\source\repos\Linka\LinkaRepository\obj\Debug\netcoreapp3.1\LinkaRepository.csprojAssemblyReference.cache
 C:\Users\User\source\repos\Linka\LinkaRepository\bin\Debug\netcoreapp3.1\LinkaRepository.pdb
 C:\Users\User\source\repos\Linka\LinkaRepository\obj\Debug\netcoreapp3.1\LinkaRepository.dll
 C:\Users\User\source\repos\Linka\LinkaRepository\obj\Debug\netcoreapp3.1\LinkaRepository.pdb

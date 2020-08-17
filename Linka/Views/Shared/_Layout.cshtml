@@ -1,4 +1,5 @@
-﻿<!doctype html>
+﻿@inject IAuth  _auth
+<!doctype html>
 <html lang="zxx">
 
 <!-- Mirrored from templates.envytheme.com/linka/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jun 2020 18:25:08 GMT -->
@@ -11,6 +12,8 @@
 	<link rel="stylesheet" href="~/css/bootstrap.min.css">
 	<!-- Owl Theme Default CSS -->
 	<link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+	<!-- JqueryToasterPlugin CSS -->
+	<link rel="stylesheet" href="~/lib/jquery-toast-plugin/jquery.toast.min.css" />
 	<!-- Owl Carousel CSS -->
 	<link rel="stylesheet" href="~/css/owl.carousel.min.css">
 	<!-- Owl Magnific CSS -->
@@ -27,6 +30,9 @@
 	<link rel="stylesheet" href="~/css/nice-select.css">
 	<!-- Style CSS -->
 	<link rel="stylesheet" href="~/css/style.css">
+
+	<link rel="stylesheet" href="~/css/leave_review.css">
+
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="~/css/responsive.css">
 	<!-- Favicon -->
@@ -63,10 +69,10 @@
 								<li class="nav-item">
 									<a asp-controller="Home" asp-action="Index" class="nav-link active">
 										Home
-										
+
 									</a>
-				
-								
+
+
 
 								<li class="nav-item">
 									<a href="#" class="nav-link">
@@ -133,13 +139,13 @@
 
 											<ul class="dropdown-menu">
 												<li class="nav-item">
-													<a href="shop.html" class="nav-link">Shop</a>
+													<a asp-controller="Shop" asp-action="Index" class="nav-link">Shop</a>
 												</li>
 												<li class="nav-item">
-													<a href="cart.html" class="nav-link">Cart</a>
+													<a a asp-controller="Cart" asp-action="Index" class="nav-link">Cart</a>
 												</li>
 												<li class="nav-item">
-													<a href="checkout.html" class="nav-link">Checkout</a>
+													<a a asp-controller="Checkout" asp-action="Index" class="nav-link">Checkout</a>
 												</li>
 												<li class="nav-item">
 													<a href="product-details.html" class="nav-link">Product Details</a>
@@ -147,31 +153,14 @@
 											</ul>
 										</li>
 
-										<li class="nav-item">
-											<a href="#" class="nav-link">
-												User
-												<i class="bx bx-chevron-right"></i>
-											</a>
 
-											<ul class="dropdown-menu">
-												<li class="nav-item">
-													<a  asp-controller="Account" asp-action="LogIn" class="nav-link">Log In</a>
-												</li>
-												<li class="nav-item">
-													<a asp-controller="Account" asp-action="SignIn" class="nav-link">Sign In</a>
-												</li>
-												<li class="nav-item">
-													<a href="recover-password.html" class="nav-link">Recover Password</a>
-												</li>
-											</ul>
-										</li>
 
 										<li class="nav-item">
 											<a href="author.html" class="nav-link">Author Page</a>
 										</li>
 
 										<li class="nav-item">
-											<a  asp-controller="Pages" asp-action="TermsConditions" class="nav-link">Terms & Conditions</a>
+											<a asp-controller="Pages" asp-action="TermsConditions" class="nav-link">Terms & Conditions</a>
 										</li>
 
 										<li class="nav-item">
@@ -221,6 +210,52 @@
 								<li class="nav-item">
 									<a asp-controller="Pages" asp-action="Contact" class="nav-link">Contact</a>
 								</li>
+								<li class="nav-item">
+									<a href="#" class="nav-link">
+										Account
+										<i class="bx bx-chevron-down"></i>
+									</a>
+
+									<ul class="dropdown-menu">
+										@if (_auth.User == null)
+										{
+											<li class="nav-item">
+												<a href="#" class="nav-link">
+													User
+													<i class="bx bx-chevron-right"></i>
+												</a>
+												<ul class="dropdown-menu">
+													<li class="nav-item">
+														<a asp-controller="Account" asp-action="LogIn" class="nav-link">Log In</a>
+													</li>
+													<li class="nav-item">
+														<a asp-controller="Account" asp-action="SignIn" class="nav-link">Sign In</a>
+													</li>
+													<li class="nav-item">
+														<a href="recover-password.html" class="nav-link">Recover Password</a>
+													</li>
+												</ul>
+											</li>
+										}
+										else
+										{
+											<li class="nav-item">
+												<a href="#" class="nav-link">@_auth.User.UserName</a>
+											</li>
+											<li class="nav-item">
+												<a asp-controller="Home" asp-action="Edit" class="nav-link">Create a Blog</a>
+											</li>
+										}
+										@if (_auth.User != null)
+										{
+
+											<li class="nav-item">
+												<a asp-controller="Account" asp-action="Logout" class="nav-link">Log Out</a>
+											</li>
+
+										}
+									</ul>
+								</li>
 							</ul>
 
 							<!-- Start Other Option -->
@@ -266,7 +301,7 @@
 								<div class="cart">
 									<a asp-controller="Cart" asp-action="Index">
 										<i class="bx bx-cart bx-flip-horizontal"></i>
-										<span class="cart-count">3</span>
+										<span class="cart"></span>
 									</a>
 								</div>
 
@@ -469,7 +504,9 @@
 	</div>
 	<!-- End Go Top Area -->
 	<!-- Jquery-3.5.1.Slim.Min.JS -->
+
 	<script src="~/js/jquery-3.5.1.slim.min.js"></script>
+	<script src="~/js/jquery.js"></script>
 	<!-- Popper JS -->
 	<script src="~/js/popper.min.js"></script>
 	<!-- Bootstrap JS -->
@@ -491,8 +528,14 @@
 	<!-- Ajaxchimp JS -->
 	<script src="~/js/jquery.ajaxchimp.min.js"></script>
 	<!-- Custom JS -->
+	<!-- JqueryToastJs -->
+	<script src="~/lib/jquery-toast-plugin/jquery.toast.min.js"></script>
+
+	<script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 	<script src="~/js/custom.js" asp-append-version="true"></script>
-	@RenderSection("Scripts",required:false)
+	@RenderSection("Scripts", required: false)
 </body>
 
 <!-- Mirrored from templates.envytheme.com/linka/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Jun 2020 18:25:37 GMT -->

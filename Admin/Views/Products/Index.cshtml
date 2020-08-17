@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ProductViewModel>
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a asp-action="Create" class="m-0 font-weight-bold  btn btn-success">New Product</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Discount Price</th>
+                            <th>Photo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+						{
+                        <tr>
+                            <td>
+                                @if (item.Status)
+                                {
+                                    <span class="badge-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge-warning">Inactive</span>
+
+                                }
+                            </td>
+                            <td>@item.Name</td>
+                            <td>@item.Price.ToString("#.00")</td>
+                            <td>@item.DiscountPrice.ToString("#.00")</td>
+                            <td>PHOT</td>
+
+                            <td class="d-flex justify-content-center">
+                                <a class="btn btn-info btn-circle btn-sm" asp-action="edit" asp-route-id="@item.Id">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a class="btn btn-danger btn-circle btn-sm ml-2 deleteitem" asp-action="delete" asp-route-id="@item.Id">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            </td>
+
+                        </tr>
+						}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+

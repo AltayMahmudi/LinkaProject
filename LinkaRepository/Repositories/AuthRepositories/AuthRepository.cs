@@ -15,11 +15,18 @@ namespace LinkaRepository.Repositories.AuthRepositories
 		{
 			_context = context;
 		}
+
+
+
 		public User CheckByToken(string token)
 		{
 			return _context.Users.FirstOrDefault(u => u.Token == token);
 		}
 
+		public bool CheckEmail(string email)
+		{
+			return _context.Users.Any(u => u.Email == email);
+		}
 
 		public User Login(string email, string password)
 		{
@@ -62,6 +69,12 @@ namespace LinkaRepository.Repositories.AuthRepositories
 		public bool UserExsist(string email)
 		{
 			return _context.Users.Any(u => u.Email == email);
+		}
+
+		public User CheckName(string username)
+		{
+			return _context.Users.FirstOrDefault(p => p.UserName == username);
+
 		}
 	}
 }
